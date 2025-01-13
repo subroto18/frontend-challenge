@@ -1,11 +1,7 @@
-import NxWelcome from './nx-welcome';
+import TodoPage from './pages/TodoPage';
 
 export function App() {
-  return (
-    <div>
-      <NxWelcome title="my-workspace" />
-    </div>
-  );
+  return <TodoPage />;
 }
 
 export default App;
