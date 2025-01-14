@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 // Custom Hook for managing error state
 const useError = () => {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const triggerError = (message) => {
+  const triggerError = (message: string) => {
     setError(message);
   };
 

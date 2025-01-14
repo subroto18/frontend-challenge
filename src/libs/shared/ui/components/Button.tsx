@@ -1,6 +1,14 @@
 import React from 'react';
 
-const Button = ({ value, width, className, onClick }) => {
+interface props {
+  value?: string;
+  width?: string;
+  isVisible?: boolean;
+  onClick?: () => void;
+  className?: string;
+}
+
+const Button = ({ value, width, className, onClick }: props) => {
   return (
     <button
       onClick={onClick}

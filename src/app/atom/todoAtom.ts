@@ -1,8 +1,9 @@
 import { atom } from 'recoil';
+import { Task } from 'src/libs/shared/lib/types';
 
 // all to do list
 
-export const todoListState = atom({
+export const todoListState = atom<Task[]>({
   key: 'todo', // Unique key for this atom
   default: [], // Initial state goes here
   effects_UNSTABLE: [
@@ -21,17 +22,20 @@ export const todoListState = atom({
 });
 
 // input data while adding
-export const todoTask = atom({
+export const todoTask = atom<string>({
   key: 'task',
   default: '',
 });
 
-export const isAutoCompleteVisible = atom({
+export const isAutoCompleteVisible = atom<boolean>({
   key: 'isAutoCompleteVisible',
   default: false,
 });
 
-export const filter = atom({
+export const filter = atom<{
+  active: boolean;
+  activeFilter: string;
+}>({
   key: 'filter',
   default: {
     active: false, // filter active or not

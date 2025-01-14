@@ -2,12 +2,7 @@ import React from 'react';
 import AutoComplete from 'src/libs/shared/ui/components/AutoComplete';
 import Button from 'src/libs/shared/ui/components/Button';
 import Input from 'src/libs/shared/ui/components/Input';
-import {
-  useRecoilCallback,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { isAutoCompleteVisible, todoTask } from 'src/app/atom/todoAtom';
 import {
   addTodoSelector,
@@ -15,8 +10,9 @@ import {
   searchTodo,
   totalTodo,
 } from 'src/app/atom/todoSelector';
+import { Task } from 'src/libs/shared/lib/types';
 const Footer = () => {
-  const [filter, setFilter] = useRecoilState(filterSelector);
+  const filter = useRecoilValue(filterSelector);
   const [input, setInput] = useRecoilState(todoTask);
   const totalToDo = useRecoilValue(totalTodo);
   const addTodo = useSetRecoilState(addTodoSelector);
@@ -27,7 +23,7 @@ const Footer = () => {
   );
   const searchTodoList = useRecoilValue(searchTodo);
 
-  const handleInput = (e) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
 
     if (e.target.value) {
@@ -38,7 +34,7 @@ const Footer = () => {
   };
 
   const handleClick = () => {
-    const newToDo = {
+    const newToDo: Task = {
       id: totalToDo + 1,
       task: input,
       isCompleted: false,
@@ -49,7 +45,7 @@ const Footer = () => {
     }
   };
 
-  const handleAutoComplete = (data) => {
+  const handleAutoComplete = (data: Task) => {
     setInput(data?.task);
     setIsAutoComplete(false);
   };

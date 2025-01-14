@@ -1,6 +1,16 @@
-import React from 'react';
+interface props {
+  value?: string;
+  width?: string;
+  isVisible: boolean;
+  onClick: () => void;
+  onChange: () => void;
+  className?: string;
+  placeholder?: string;
+  type?: string;
+  label?: string;
+}
 
-const Switch = ({ value, label, onChange }) => {
+const Switch = ({ value, label, onChange }: props) => {
   return (
     <div>
       <label className="inline-flex items-center cursor-pointer">

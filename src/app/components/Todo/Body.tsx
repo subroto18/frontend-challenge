@@ -2,7 +2,7 @@ import React from 'react';
 import Checkbox from 'src/libs/shared/ui/components/Checkbox';
 import { AiFillDelete } from 'react-icons/ai';
 import { confirmAlert } from 'react-confirm-alert';
-import { useRecoilCallback, useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 import {
   deleteTodosSelector,
   filteredTodosSelector,
@@ -11,19 +11,19 @@ import {
 import { COMPLETED, INCOMPLETE } from 'src/libs/shared/utils/helper';
 
 const Body = () => {
-  const [filter, setFilter] = useRecoilState(filterSelector);
+  const filter = useRecoilValue(filterSelector);
 
   // filter todo based on filter status
   const filteredTodoBaseOn =
-    filter.activeFilter === COMPLETED
+    filter?.activeFilter === COMPLETED
       ? COMPLETED
-      : filter.activeFilter === INCOMPLETE
+      : filter?.activeFilter === INCOMPLETE
       ? INCOMPLETE
       : '';
 
   // Create a callback to delete a todo dynamically
   const todoList = useRecoilValue(filteredTodosSelector(filteredTodoBaseOn));
-  const handleDeleteTodo = (id) => {
+  const handleDeleteTodo = (id: number) => {
     confirmAlert({
       title: 'Delete?',
       message: 'Are you sure to delete it',
@@ -56,7 +56,7 @@ const Body = () => {
           {todoList?.map((item) => {
             return (
               <div className="flex border-b-2 mb-2">
-                <Checkbox value={item} />
+                <Checkbox data={item} />
                 {item.isCompleted && (
                   <AiFillDelete
                     onClick={() => handleDeleteTodo(item.id)}

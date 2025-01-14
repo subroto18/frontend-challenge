@@ -1,25 +1,19 @@
-import { filterSelector } from './todoSelector';
-import { AutoComplete } from 'src/libs/shared/ui/components/AutoComplete';
 import { selector, selectorFamily } from 'recoil';
-import {
-  isAutoCompleteVisible,
-  todoListState,
-  todoTask,
-  filter,
-} from './todoAtom';
+import { todoListState, todoTask, filter } from './todoAtom';
 import { toast } from 'react-toastify';
 import { COMPLETED, INCOMPLETE } from 'src/libs/shared/utils/helper';
+import { Task } from 'src/libs/shared/lib/types';
 
 // for add todo
 export const addTodoSelector = selector({
   key: 'addTodoSelector',
   get: ({ get }) => get(todoListState), // Return the current state
-  set: ({ get, set }, newTodo) => {
+  set: ({ get, set }, newTodo: Task) => {
     const currentTodos = get(todoListState);
 
     const isTaskExistAlready = currentTodos.find((item) => {
       if (
-        item.task.toLowerCase() == newTodo.task.toLowerCase() &&
+        item.task.toLowerCase() === newTodo.task.toLowerCase() &&
         !item.isCompleted
       ) {
         return true;
@@ -51,17 +45,17 @@ export const searchTodo = selector({
   key: 'autoCompleteTodo',
   get: ({ get }) => {
     const todos = get(todoListState);
-    let searchData = get(todoTask)?.toLocaleLowerCase(); // input data
+    const searchData = get(todoTask)?.toLocaleLowerCase(); // input data
 
     if (!searchData) return [];
 
-    let searchList = todos.filter((todo) => {
+    const searchList = todos.filter((todo) => {
       return todo.task.toLowerCase().includes(searchData);
     });
 
     // only unique
 
-    let uniqueList = Array.from(
+    const uniqueList = Array.from(
       new Map(searchList.map((item) => [item.task, item])).values()
     );
 

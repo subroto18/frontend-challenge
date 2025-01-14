@@ -1,6 +1,14 @@
 import React from 'react';
+import { Task } from '../../lib/types';
 
-const AutoComplete = ({ data, isVisible, onClick, className }) => {
+interface props {
+  data: Task[];
+  isVisible?: boolean;
+  onClick: (event: Task) => void;
+  className?: string;
+}
+
+const AutoComplete = ({ data, isVisible, onClick, className }: props) => {
   return isVisible && data?.length > 0 ? (
     <ul
       className={`${
@@ -10,18 +18,16 @@ const AutoComplete = ({ data, isVisible, onClick, className }) => {
       {data?.map((item) => {
         return (
           <li
-            key={item.key}
+            key={item.id}
             className="px-4 py-2 cursor-pointer hover:bg-blue-100"
             onClick={() => onClick(item)}
           >
-            {item.task}
+            {item?.task}
           </li>
         );
       })}
     </ul>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default AutoComplete;
