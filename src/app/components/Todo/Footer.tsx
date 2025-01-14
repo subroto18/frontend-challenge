@@ -59,13 +59,16 @@ const Footer = () => {
       {!filter.active && (
         <div className="absolute bg-slate-100 bottom-0 left-0 w-full border-t-2  text-center px-10 py-2 shadow-md ">
           <div className="flex ">
-            <Button className={'w-[4%] h-[2rem] mr-5 '} value={'+'} />
+            <Button
+              className={'w-[2rem] md:w-[4rem] h-[1.5rem] md:h-[2rem] mr-5 '}
+              value={'+'}
+            />
 
             <div className="w-[80%]">
               <Input
                 onChange={handleInput}
                 value={input}
-                className={'bg-slate-100'}
+                className={'bg-slate-100 text-[14px] md:text-1xl'}
                 placeholder={'Memoize the dictonary'}
               />
               <AutoComplete
@@ -78,7 +81,9 @@ const Footer = () => {
 
             <Button
               onClick={handleClick}
-              className={'w-[8rem] h-[2rem]  ml-5'}
+              className={
+                'w-[8rem] text-xs md:w-[8rem] h-[1.5rem]  md:h-[2rem]  ml-5'
+              }
               value={'Add Item'}
             />
           </div>
