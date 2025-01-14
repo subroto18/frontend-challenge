@@ -7,6 +7,7 @@ import { isAutoCompleteVisible, todoTask } from 'src/app/atom/todoAtom';
 import {
   addTodoSelector,
   filterSelector,
+  generateToDoId,
   searchTodo,
   totalTodo,
 } from 'src/app/atom/todoSelector';
@@ -14,7 +15,7 @@ import { Task } from 'src/libs/shared/lib/types';
 const Footer = () => {
   const filter = useRecoilValue(filterSelector);
   const [input, setInput] = useRecoilState(todoTask);
-  const totalToDo = useRecoilValue(totalTodo);
+  const newTodoId = useRecoilValue(generateToDoId);
   const addTodo = useSetRecoilState(addTodoSelector);
   // const deleteTodo = useSetRecoilState(deleteTodosSelector); // Get the delete selector
 
@@ -35,7 +36,7 @@ const Footer = () => {
 
   const handleClick = () => {
     const newToDo: Task = {
-      id: totalToDo + 1,
+      id: newTodoId,
       task: input,
       isCompleted: false,
     };

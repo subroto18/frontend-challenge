@@ -6,10 +6,11 @@ import Badge from 'src/libs/shared/ui/components/Badge';
 import { useRecoilState } from 'recoil';
 import { COMPLETED, INCOMPLETE } from 'src/libs/shared/utils/helper';
 import { filterSelector } from 'src/app/atom/todoSelector';
+
 const Header = () => {
   const [filter, setFilter] = useRecoilState(filterSelector);
 
-  const handleFilter = (isActive, filter) => {
+  const handleFilter = (isActive: boolean, filter: string) => {
     // set filter base on completed or incomplete
     setFilter({
       active: isActive,
@@ -63,9 +64,11 @@ const Header = () => {
           ) : (
             <div className="flex mt-2">
               <Switch
-                value={false}
+                value=""
                 label={'Incomplete / Completed'}
-                onChange={(e) => handleToggleFilter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleToggleFilter(e.target.value)
+                }
               />
               <MdCancel
                 onClick={() => handleFilter(false, INCOMPLETE)}

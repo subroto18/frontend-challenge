@@ -21,6 +21,13 @@ export const addTodoSelector = selector({
     });
 
     if (!isTaskExistAlready) {
+      const isIdExist = currentTodos.indexOf(newTodo.id) > -1 ? true : false;
+
+      if (isIdExist) {
+        toast.error('Something went wrong. Might be Duplicate Id ');
+        return;
+      }
+
       set(todoListState, [...currentTodos, newTodo]);
       // after inserting todo into list, clear input field
       set(todoTask, '');
@@ -36,6 +43,15 @@ export const totalTodo = selector({
   get: ({ get }) => {
     const todo = get(todoListState);
     return todo.length;
+  },
+});
+
+// for count todo
+export const generateToDoId = selector({
+  key: 'totalToDo',
+  get: ({ get }) => {
+    const todo = get(todoListState);
+    return todo.length + 1;
   },
 });
 

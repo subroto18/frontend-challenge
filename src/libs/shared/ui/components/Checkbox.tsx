@@ -4,10 +4,15 @@ import { todoListState } from 'src/app/atom/todoAtom';
 import { TASK_SHOW_COUNT } from '../../utils/helper';
 import { Task } from '../../lib/types';
 
-const Checkbox: React.FC<Task> = (data) => {
+type CheckboxProps = {
+  data: Task;
+};
+
+const Checkbox: React.FC<CheckboxProps> = ({ data }) => {
   const setTodo = useSetRecoilState(todoListState);
 
   const handleCheckBox = (data: Task) => {
+    console.log(data.id, 'id');
     setTodo((prevTodos) =>
       prevTodos.map((todo) =>
         todo?.id === data?.id
