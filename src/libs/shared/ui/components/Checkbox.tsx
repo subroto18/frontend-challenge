@@ -33,7 +33,11 @@ const Checkbox = ({ value }) => {
           value.isCompleted ? 'bg-[#7227f7]' : 'bg-gray-100'
         } w-6 h-6    border-4 border-[#7227f7] rounded-full peer-checked:bg-[#7227f7] peer-checked:border-[#7227f7] peer-focus:ring-2 peer-focus:ring-[#7227f7] mr-1 cursor-pointer`}
       ></div>
-      <label className="text-md  text-gray-700 font-semibold">
+      <label
+        className={`${
+          value.isCompleted ? 'line-through' : ''
+        } text-md  text-gray-700 font-semibold `}
+      >
         {value.task}
       </label>
     </div>
