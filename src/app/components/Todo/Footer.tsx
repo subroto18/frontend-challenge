@@ -57,7 +57,7 @@ const Footer = () => {
   return (
     <footer>
       {!filter.active && (
-        <div className="absolute bottom-0 left-0 w-full border-t-2  text-center px-10 py-2 shadow-sm">
+        <div className="absolute bg-slate-100 bottom-0 left-0 w-full border-t-2  text-center px-10 py-2 shadow-md ">
           <div className="flex ">
             <Button className={'w-[4%] h-[2rem] mr-5 '} value={'+'} />
 
@@ -65,6 +65,7 @@ const Footer = () => {
               <Input
                 onChange={handleInput}
                 value={input}
+                className={'bg-slate-100'}
                 placeholder={'Memoize the dictonary'}
               />
               <AutoComplete
